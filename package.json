@@ -1,0 +1,30 @@
+{
+  "name": "Mondarth Campaign Table: Player's Handbook",
+  "version": "0.0.0",
+  "description": "Handbook for Mondarth Campaign Table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Warn: no test specified\" && exit 0",
+    "prepare": "husky",
+    "build:docs": "docker run --rm --user \"$(id -u):$(id -g)\" -v \"$(pwd)/docs\":/docs ghcr.io/ulenarofmondarth/sphinx-docs make html",
+    "serve:docs": "docker run --rm --name docserver -d -p 8084:80 -v \"$(pwd)/docs/_build/html\":/usr/share/nginx/html:ro nginx",
+    "devserve:docs": "docker run --rm --user \"$(id -u):$(id -g)\" --name docdevserver-mon-phb -d -p 8084:8000 -v \"$(pwd)/docs\":/doc -w /doc ghcr.io/ulenarofmondarth/sphinx-docs sphinx-autobuild --host 0.0.0.0 --port 8000 . _build/html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Mondarth/Mondarth-Campaign-Player-Handbook.git"
+  },
+  "author": "UlenarOfMondarth",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://igthub.com/Mondarth/Mondarth-Campaign-Player-Handbook/issues"
+  },
+  "homepage": "https://igthub.com/Mondarth/Mondarth-Campaign-Player-Handbook/#readme",
+  "devDependencies": {
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0",
+    "commitizen": "4.3.1",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^9.1.6"
+  }
+}
